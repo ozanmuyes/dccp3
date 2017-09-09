@@ -1,0 +1,26 @@
+version: '2'
+services:
+  db:
+    image: mariadb:10.3.1
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=my_app
+    volumes:
+      - ./db:/var/lib/mysql
+  fpm:
+    build:
+      context: ./fpm
+    volumes:
+      - /path/to/my_app:/var/app # TODO Change it to fit your needs
+    expose:
+      - "9000"
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=my_app
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /path/to/my_app:/var/app:ro # TODO Change it to fit your needs
