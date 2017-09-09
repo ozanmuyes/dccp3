@@ -21,39 +21,39 @@ Not so surprisingly though, CakePHP 3 is **not** included. You should get it by 
 ## How to Use
 
 1. Clone the repository and enter the directory;
-```shell
-$ git clone git@github.com:ozanmuyes/dccp3.git
-$ cd dccp3
-```
-NOTE: A little recommendation here; since this repository is to contain database files, it is good to separate each `dccp3` installment. For example if your CakePHP project's name (it's directory name) is `my_app` it is advised to rename the cloned `dccp3` directory as `dccp3-my_app`.
+    ```shell
+    $ git clone git@github.com:ozanmuyes/dccp3.git
+    $ cd dccp3
+    ```
+    NOTE: A little recommendation here; since this repository is to contain database files, it is good to separate each `dccp3` installment. For example if your CakePHP project's name (it's directory name) is `my_app` it is advised to rename the cloned `dccp3` directory as `dccp3-my_app`.
 
 2. Change `/path/to/my_app` on `docker-compose.yml` to point your project's absolute path.
 For example if your CakePHP 3 project is under this directory; `/home/john.doe/Code/my_beautiful_project` then the [related line](https://github.com/ozanmuyes/dccp3/blob/master/docker-compose.yml#L8) in the `docker-compose.yml` should read;
-```yml
-    - /home/john.doe/Code/my_beautiful_project:/var/app
-```
+    ```yml
+        - /home/john.doe/Code/my_beautiful_project:/var/app
+    ```
 
 3. Change database settings of your project as following;
-```php
-// /path/to/my_app/config/app.php
-'Datasources' => [
-        'default' => [
-            // ...
-            'host' => 'db', # On line 225-ish (was 'localhost')
-            // ...
-            'username' => 'root', # On line 232-ish (was 'my_app')
-            // ...
-        ]
-    // ...
-]
-```
+    ```php
+    // /path/to/my_app/config/app.php
+    'Datasources' => [
+            'default' => [
+                // ...
+                'host' => 'db', # On line 225-ish (was 'localhost')
+                // ...
+                'username' => 'root', # On line 232-ish (was 'my_app')
+                // ...
+            ]
+        // ...
+    ]
+    ```
 
 4. Be sure that 'logs' directory (i.e. `/path/to/my_app/logs/` directory) is empty (or at least there is no 'error.log' file exists). This prevents PHP errors that telling it cannot write to log files due to privileges, let the environment (this repository) create log files.
 
 5. Start the environment;
-```shell
-$ sudo docker-compose up
-```
+    ```shell
+    $ sudo docker-compose up
+    ```
 
 That's it. If this is the first time you ran this command be patient. After the installation you can visit [localhost](http://localhost:80) to see your application running.
 
